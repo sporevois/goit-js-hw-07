@@ -23,10 +23,12 @@ console.log(galleryItems);
 // по умолчанию пользователь будет перенаправлен на другую страницу. 
 // Запрети это поведение по умолчанию.
 
-const galleryRef = document.querySelector('.gallery')
+const galleryRef = document.querySelector('.gallery');
+galleryRef.addEventListener('click', openOriginalImg);
+const galleryMarkUp = galleryItems.forEach(createGalleryItem);
 
-const createGalleryItem = ({preview, original, description}) => {
-    const item = galleryRef.insertAdjacentHTML('beforeend',
+function createGalleryItem ({ preview, original, description }) {
+  galleryRef.insertAdjacentHTML('beforeend',
     `<div class="gallery__item">
         <a class="gallery__link" href="${original}">
           <img
@@ -38,4 +40,20 @@ const createGalleryItem = ({preview, original, description}) => {
         </a>
     </div>`); 
 }
-const galleryMarkUp = galleryItems.forEach(createGalleryItem);
+function openOriginalImg(event) {
+  event.preventDefault();
+  const selectedItemUrl = event.target.dataset.source;
+  const instance = basicLightbox.create(`
+    <img src=${selectedItemUrl} width="800" height="600">
+`)
+  instance.show()
+
+// Waiting for Esc
+ window.addEventListener('keydown', onModalEscClick)
+    function onModalEscClick(event) {
+    if (event.code === 'Escape') {
+      instance.close()
+    }
+  }
+}
+
