@@ -25,7 +25,7 @@ console.log(galleryItems);
 
 const galleryRef = document.querySelector('.gallery');
 galleryRef.addEventListener('click', openOriginalImg);
-const galleryMarkUp = galleryItems.forEach(createGalleryItem);
+galleryItems.forEach(createGalleryItem);
 
 function createGalleryItem ({ preview, original, description }) {
   galleryRef.insertAdjacentHTML('beforeend',
