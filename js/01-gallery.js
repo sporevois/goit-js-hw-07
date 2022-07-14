@@ -48,7 +48,7 @@ function openOriginalImg(event) {
 `)
   instance.show()
 
-  // Waiting for Esc
+  // Close with keyboard
   window.addEventListener('keydown', (event) => {
     if (event.code === 'Escape') {
       instance.close()
