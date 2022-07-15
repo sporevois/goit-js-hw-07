@@ -2,9 +2,9 @@ import { galleryItems } from './gallery-items.js';
 // Change code below this line
 console.log(galleryItems);
 
-// *1. Создание и рендер разметки по массиву данных galleryItems и предоставленному 
+// 1. Создание и рендер разметки по массиву данных galleryItems и предоставленному 
 // шаблону элемента галереи.Используй готовый код из первого задания.
-// *2. Подключение скрипта и стилей библиотеки используя CDN сервис cdnjs. 
+// 2. Подключение скрипта и стилей библиотеки используя CDN сервис cdnjs. 
 // Необходимо добавить ссылки на два файла: simple - lightbox.min.js и
 // simple - lightbox.min.css.
 // 3. Инициализация библиотеки после того как элементы галереи созданы и добавлены 
@@ -15,7 +15,6 @@ console.log(galleryItems);
 // 250 миллисекунд после открытия изображения.
 
 const galleryRef = document.querySelector('.gallery');
-galleryRef.addEventListener('click', openOriginalImg);
 galleryItems.forEach(createGalleryItem);
 
 function createGalleryItem ({ preview, original, description }) {
@@ -23,11 +22,9 @@ function createGalleryItem ({ preview, original, description }) {
     `<a class="gallery__item" href="${original}">
       <img class="gallery__image" src="${preview}" alt="${description}" />
     </a>`); 
-}
 
-function openOriginalImg(event) {
-  event.preventDefault();
-  const selectedItemUrl = event.target.dataset.source;
-
-  var lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 }
+const lightbox = new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
