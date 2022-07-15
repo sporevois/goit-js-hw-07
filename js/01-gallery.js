@@ -40,19 +40,26 @@ function createGalleryItem ({ preview, original, description }) {
         </a>
     </div>`); 
 }
+
+
 function openOriginalImg(event) {
   event.preventDefault();
   const selectedItemUrl = event.target.dataset.source;
+  
   const instance = basicLightbox.create(`
-    <img src=${selectedItemUrl} width="800" height="600">
-`)
-  instance.show()
-
-  // Close with keyboard
-  window.addEventListener('keydown', (event) => {
-    if (event.code === 'Escape') {
-      instance.close()
-    }
-  })
+    <img src=${selectedItemUrl} width="800" height="600">`
+    , {
+      onShow: () => {
+        window.addEventListener('keydown', onEscBtnClick)
+      },
+      onClose: () => {
+        window.removeEventListener('keydown', onEscBtnClick)
+      }
+    })
+    instance.show()
+  
+  function onEscBtnClick(event) {
+    event.code === 'Escape' && instance.close()
+  }
 }
 
